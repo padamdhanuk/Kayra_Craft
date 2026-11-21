@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "437921426739",
+    "project_id": "kayra-craft",
+    "storage_bucket": "kayra-craft.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437921426739:android:3fa701375bb3c32507e246",
+        "android_client_info": {
+          "package_name": "com.example.kayra_craft"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgdrOXlqOXpg-MpFaySdnWow_rO_Xm2Q4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
