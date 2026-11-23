@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local configuration used with --dart-define-from-file
+config/*.local.json
+.env
+.env.*
+!.env.example

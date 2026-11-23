@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../data/products.dart';
+import 'furniture_listings_page.dart';
 import 'interior_design_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final pages = [
       _HomeContent(onBrowseFurniture: () => setState(() => index = 1)),
-      const _FurnitureContent(),
+      FurnitureListingsPage(auth: widget.auth),
       const InteriorDesignPage(),
       const _CartContent(),
       _ProfileContent(auth: widget.auth),
@@ -195,15 +196,6 @@ class _HomeContent extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class _FurnitureContent extends StatelessWidget {
-  const _FurnitureContent();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('Furniture'));
   }
 }
 

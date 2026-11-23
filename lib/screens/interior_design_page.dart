@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 class InteriorDesignPage extends StatelessWidget {
   const InteriorDesignPage({super.key});
   @override

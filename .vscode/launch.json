@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Kayra Craft (local Cloudinary)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "toolArgs": [
+                "--dart-define-from-file=config/cloudinary.local.json"
+            ]
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
