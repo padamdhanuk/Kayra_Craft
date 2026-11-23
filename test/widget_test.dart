@@ -9,7 +9,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:kayra_craft/main.dart';
@@ -93,7 +92,18 @@ void main() {
     expect(find.text('Modern Comfort Sofa'), findsOneWidget);
     expect(find.text('Elegant King Bed'), findsOneWidget);
     expect(find.text('Wooden Dining Table'), findsOneWidget);
-    expect(find.byType(SvgPicture), findsNWidgets(4));
+    expect(
+      find.image(const AssetImage('assets/images/sofa-image4.jpg')),
+      findsNWidgets(2),
+    );
+    expect(
+      find.image(const AssetImage('assets/images/bed.png')),
+      findsOneWidget,
+    );
+    expect(
+      find.image(const AssetImage('assets/images/dining.jpg')),
+      findsOneWidget,
+    );
   });
 
   testWidgets('password reset requires an email address', (

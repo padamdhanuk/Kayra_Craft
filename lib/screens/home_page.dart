@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../data/products.dart';
 import 'furniture_listings_page.dart';
 import 'interior_design_page.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({required this.auth, super.key});
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       FurnitureListingsPage(auth: widget.auth),
       const InteriorDesignPage(),
       const _CartContent(),
-      _ProfileContent(auth: widget.auth),
+      ProfilePage(auth: widget.auth),
     ];
 
     return Scaffold(
@@ -120,8 +120,8 @@ class _HomeContent extends StatelessWidget {
                 SizedBox(
                   width: 124,
                   height: 124,
-                  child: SvgPicture.asset(
-                    'assets/images/sofa.svg',
+                  child: Image.asset(
+                    'assets/images/sofa-image4.jpg',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -154,15 +154,11 @@ class _HomeContent extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           height: 142,
-                          child: ColoredBox(
-                            color: const Color(0xFFF2ECE5),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: SvgPicture.asset(
-                                product.image,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
+                          child: Image.asset(
+                            product.image,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
@@ -205,51 +201,5 @@ class _CartContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(child: Text('Your Cart'));
-  }
-}
-
-class _ProfileContent extends StatelessWidget {
-  const _ProfileContent({required this.auth});
-
-  final FirebaseAuth auth;
-
-  @override
-  Widget build(BuildContext context) {
-    final user = auth.currentUser;
-
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text(
-            'My Profile',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          Text(user?.isAnonymous == true ? 'Guest account' : user?.email ?? ''),
-          const SizedBox(height: 20),
-          OutlinedButton.icon(
-            onPressed: () async {
-              try {
-                await auth.signOut();
-              } on FirebaseAuthException catch (error) {
-                if (!context.mounted) {
-                  return;
-                }
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Could not sign out (${error.code}). Please try again.',
-                    ),
-                  ),
-                );
-              }
-            },
-            icon: const Icon(Icons.logout),
-            label: const Text('Sign out'),
-          ),
-        ],
-      ),
-    );
   }
 }

@@ -25,7 +25,7 @@ This is an early-stage UI prototype, not a complete e-commerce application.
 | Home and navigation | Shows a furniture hero, local sample illustrations, featured products, and tabs for Home, Furniture, Interior, Cart, and Profile. |
 | Furniture data | Bundled sample products remain on Home. The Furniture tab shows five demo listings when Firestore is empty. Signed-in email/password users can create, edit, remove, and mark their listings as sold, with structured description, price, condition, area, photo, and opt-in contact fields. |
 | Interior design | Displays a “Coming Soon” message. |
-| Cart and profile | Cart is a placeholder. Profile shows the signed-in email or guest status and supports sign-out; no editable profile data is stored. |
+| Cart and profile | Cart is a placeholder. Signed-in users can create and edit a profile with initials, display name, account email, and optional neighborhood. The display name and neighborhood are saved to the user's private Firestore document; guest accounts cannot save profiles. |
 | Checkout and payments | Not implemented. |
 
 ## Database and data storage
@@ -37,9 +37,10 @@ Seller phone numbers are only stored on a public listing when the seller opts
 in to sharing them. If opted in, buyers can launch a call or WhatsApp message.
 Cloudinary stores the image files. If the collection is empty or unavailable,
 the Furniture tab shows five demo listings with Unsplash image URLs. The
-bundled sample products remain in
-[`lib/data/products.dart`](lib/data/products.dart); buyer/shopkeeper profiles,
-carts, and orders are not stored yet.
+`users/{uid}` collection stores each authenticated user's display name and
+optional neighborhood; profile reads and writes are restricted to that user.
+The bundled sample products remain in [`lib/data/products.dart`](lib/data/products.dart);
+carts and orders are not stored yet.
 
 ## Authentication
 
@@ -65,7 +66,7 @@ deploy the included [`firestore.rules`](firestore.rules).
 - `http` uploads photos to Cloudinary.
 - `image_picker` selects listing photos from the device.
 - `url_launcher` opens the seller's phone or WhatsApp action.
-- Local SVG illustration support: `flutter_svg`.
+- Bundled sofa, bed, and dining images in `assets/images/`.
 
 ## Source layout
 
@@ -77,6 +78,9 @@ deploy the included [`firestore.rules`](firestore.rules).
 | [`lib/widgets/firebase_setup_page.dart`](lib/widgets/firebase_setup_page.dart) | Explains how to configure Firebase when setup is missing or fails. |
 | [`lib/firebase_options.dart`](lib/firebase_options.dart) | FlutterFire-generated platform options. |
 | [`lib/screens/home_page.dart`](lib/screens/home_page.dart) | Main navigation and sign-out control. |
+| [`lib/screens/profile_page.dart`](lib/screens/profile_page.dart) | Profile creation and editing for signed-in users. |
+| [`lib/data/user_profile_repository.dart`](lib/data/user_profile_repository.dart) | Saves and watches per-user profile documents in Firestore. |
+| [`lib/models/user_profile.dart`](lib/models/user_profile.dart) | Profile data and avatar-initial helpers. |
 | [`lib/screens/furniture_listings_page.dart`](lib/screens/furniture_listings_page.dart) | Firestore-backed furniture feed. |
 | [`lib/screens/add_furniture_listing_page.dart`](lib/screens/add_furniture_listing_page.dart) | Photo, details, price, condition, area, and seller contact form. |
 | [`lib/data/furniture_listing_repository.dart`](lib/data/furniture_listing_repository.dart) | Firestore listing and Cloudinary image URL operations. |

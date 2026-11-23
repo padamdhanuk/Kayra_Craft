@@ -2,6 +2,13 @@
 
 Run these commands from the project root.
 
+## Hot reload command 
+Press r to hot reload after making some changes to the code and when you want to see the effect of the code you have changed.
+
+## Flutter commands to run on Microsft edge and emulator
+flutter run -d edge --dart-define-from-file=config/cloudinary.local.json
+flutter run -d emulator-5554 --dart-define-from-file=config/cloudinary.local.json
+
 ## Setup
 
 ```powershell
